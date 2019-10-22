@@ -152,10 +152,10 @@ def main():
     for _ in range(config.train.epochs):
         for _, (imgs, l) in enumerate(loader):
             print("before")
-            print(imgs)
+            print(imgs.shape())
             imgs = imgs.to(config.device)
             print("after")
-            print(imgs)
+            print(imgs.shape())
             model.train()
 
             scheduler.step()
