@@ -154,7 +154,8 @@ def main():
     for _ in range(config.train.epochs):
         for _, (imgs, l) in enumerate(loader):
             print("before")
-            print(imgs[3][2][31])
+            # print(imgs[3][2][31])
+            print(imgs)
             imgs = imgs.to(config.device)
             print("after")
             print(imgs[3][2][31])
