@@ -157,7 +157,7 @@ def main():
             print(imgs[63][2][31])
             imgs = imgs.to(config.device)
             print("after")
-            print(imgs[63][2][31])
+            print(imgs[3][2][31])
             model.train()
 
             scheduler.step()
