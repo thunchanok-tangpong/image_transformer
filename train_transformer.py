@@ -115,9 +115,11 @@ def main():
             transforms.ToTensor()
         ])
     dataset = datasets.CIFAR10('datasets/transformer', transform=transform, download=True)
+    T = torch.randn((50000, 2, 3,32))
     print("this is dataset output------------")
-    print(dataset)
-    loader = DataLoader(dataset, batch_size=config.train.batch_size, shuffle=True, num_workers=4)
+    # print(dataset)
+    # loader = DataLoader(dataset, batch_size=config.train.batch_size, shuffle=True, num_workers=4)
+    loader = DataLoader(T, batch_size=config.train.batch_size, shuffle=True, num_workers=4)
     input_dim = config.model.image_size ** 2 * config.model.channels
     model = ImageTransformer(config.model).to(config.device)
     optimizer = optim.Adam(model.parameters(), lr=1., betas=(0.9, 0.98), eps=1e-9)
