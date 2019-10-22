@@ -169,8 +169,8 @@ def main():
             optimizer.zero_grad()
             preds = model(imgs)
             # preds = model(T)
-            # loss = model.loss(preds, imgs)
-            loss = model.loss(preds, T)
+            loss = model.loss(preds, imgs)
+            # loss = model.loss(preds, T)
             decay = 0. if step == 0 else 0.99
             if config.model.distr == "dmol":
                 losses_per_dim[0,:,:] = losses_per_dim[0,:,:] * decay + (1 - decay) * loss.detach().mean(0) / np.log(2)
@@ -202,8 +202,8 @@ def main():
 
             optimizer.step()
             bits_per_dim = loss / (np.log(2.) * input_dim)
-            # acc = model.accuracy(preds, imgs)
-            acc = model.accuracy(preds, T)
+            acc = model.accuracy(preds, imgs)
+            # acc = model.accuracy(preds, T)
 
             if step % config.train.log_iter == 0:
                 logging.info('step: {}; loss: {:.3f}; bits_per_dim: {:.3f}, acc: {:.3f}, grad norm pre: {:.3f}, post: {:.3f}'
@@ -227,10 +227,10 @@ def main():
 
                 model.eval()
                 with torch.no_grad():
-                    # imgs = revert_samples(imgs)
-                    T = revert_samples(T)
-                    # imgs_grid = torchvision.utils.make_grid(imgs[:8, ...], 3)
-                    imgs_grid = torchvision.utils.make_grid(T[:8, ...], 3)
+                    imgs = revert_samples(imgs)
+                    # T = revert_samples(T)
+                    imgs_grid = torchvision.utils.make_grid(imgs[:8, ...], 3)
+                    # imgs_grid = torchvision.utils.make_grid(T[:8, ...], 3)
                     tb_logger.add_image('imgs', imgs_grid, global_step=step)
 
                     # Evaluate model predictions for the input
