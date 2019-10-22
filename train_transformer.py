@@ -114,6 +114,8 @@ def main():
             transforms.ToTensor()
         ])
     dataset = datasets.CIFAR10('datasets/transformer', transform=transform, download=True)
+    print("this is dataset output------------")
+    print(dataset)
     loader = DataLoader(dataset, batch_size=config.train.batch_size, shuffle=True, num_workers=4)
     input_dim = config.model.image_size ** 2 * config.model.channels
     model = ImageTransformer(config.model).to(config.device)
@@ -152,10 +154,10 @@ def main():
     for _ in range(config.train.epochs):
         for _, (imgs, l) in enumerate(loader):
             print("before")
-            print(imgs.size)
+            print(imgs[63][2][31])
             imgs = imgs.to(config.device)
             print("after")
-            print(imgs.size)
+            print(imgs[63][2][31])
             model.train()
 
             scheduler.step()
