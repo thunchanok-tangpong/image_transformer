@@ -159,6 +159,7 @@ def main():
     
     for _ in range(config.train.epochs):
         for _, (imgs, l) in enumerate(loader):
+            print(imgs)
            
             imgs = imgs.to(config.device)
             # T=T.to(config.device)
