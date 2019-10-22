@@ -18,7 +18,7 @@ from torchvision import datasets, transforms
 from torchviz import make_dot
 from tqdm import tqdm
 import torch.nn as nn
-import tensorflow as tf 
+# import tensorflow as tf 
 
 matplotlib.use('Agg')
 import seaborn as sns
@@ -152,23 +152,21 @@ def main():
 
     step = 0
     losses_per_dim = torch.zeros(config.model.channels, config.model.image_size, config.model.image_size).to(config.device)
+    T_data = [[[1., 2.], [3., 4.]],
+          [[5., 6.], [7., 8.]]]
+    T = torch.tensor(T_data)
     
-    t3 = tf.constant([[[0.6392, 0.7451, 0.7647],
-          [0.6627, 0.5765, 0.6431],
-          [0.7255, 0.6824, 0.6392]
-            ]]) 
     for _ in range(config.train.epochs):
         # for _, (imgs, l) in enumerate(loader):
            
             # imgs = imgs.to(config.device)
-            # t3=t3.to(config.device)
-            
+            T=T.to(config.device)
             model.train()
 
             scheduler.step()
             optimizer.zero_grad()
             # preds = model(imgs)
-            preds = model(t3)
+            preds = model(T)
             loss = model.loss(preds, imgs)
             decay = 0. if step == 0 else 0.99
             if config.model.distr == "dmol":
