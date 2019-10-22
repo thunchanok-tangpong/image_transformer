@@ -155,19 +155,19 @@ def main():
     step = 0
     losses_per_dim = torch.zeros(config.model.channels, config.model.image_size, config.model.image_size).to(config.device)
     
-    T = torch.randn((4, 3, 32))
+    # T = torch.randn((4, 3, 32))
     
     for _ in range(config.train.epochs):
-        # for _, (imgs, l) in enumerate(loader):
+        for _, (imgs, l) in enumerate(loader):
            
-            # imgs = imgs.to(config.device)
-            T=T.to(config.device)
+            imgs = imgs.to(config.device)
+            # T=T.to(config.device)
             model.train()
 
             scheduler.step()
             optimizer.zero_grad()
-            # preds = model(imgs)
-            preds = model(T)
+            preds = model(imgs)
+            # preds = model(T)
             # loss = model.loss(preds, imgs)
             loss = model.loss(preds, T)
             decay = 0. if step == 0 else 0.99
