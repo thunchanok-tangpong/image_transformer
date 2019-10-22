@@ -152,9 +152,8 @@ def main():
 
     step = 0
     losses_per_dim = torch.zeros(config.model.channels, config.model.image_size, config.model.image_size).to(config.device)
-    T_data = [[[1., 2.], [3., 4.]],
-          [[5., 6.], [7., 8.]]]
-    T = torch.tensor(T_data)
+    
+    T = torch.randn((4, 3, 32))
     
     for _ in range(config.train.epochs):
         # for _, (imgs, l) in enumerate(loader):
