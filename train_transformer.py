@@ -155,7 +155,7 @@ def main():
         for _, (imgs, l) in enumerate(loader):
             print("before")
             # print(imgs[3][2][31])
-            print(imgs)
+            print(imgs[3][2])
             imgs = imgs.to(config.device)
             print("after")
             print(imgs[3][2][31])
