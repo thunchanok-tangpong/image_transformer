@@ -160,7 +160,7 @@ def main():
         # for _, (imgs, l) in enumerate(loader):
            
             # imgs = imgs.to(config.device)
-            t3=.to(config.device)
+            t3=t3.to(config.device)
             
             model.train()
 
